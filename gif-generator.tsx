@@ -621,7 +621,7 @@ export default function GifGenerator() {
             </p>
             <p>• Your cat will automatically grow as you commit more code</p>
             <p>• The more you code, the cuter your cat becomes! 🐱💕</p>
-            <p className="text-green-600 font-medium">✅ SVG images work perfectly in README files!</p>
+            
           </div>
         </CardContent>
       </Card>
