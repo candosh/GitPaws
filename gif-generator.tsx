@@ -473,12 +473,19 @@ export default function GifGenerator() {
   }
 
   const handleGenerateGif = async () => {
+    if (!githubData) {
+      alert("Please fetch GitHub data first! 🐱")
+      return
+    }
+
     setIsGenerating(true)
     await new Promise((resolve) => setTimeout(resolve, 2000))
-    const gifUrl = `https://commit-cat.vercel.app/api/cat/${username}?stage=${selectedStage}`
-    navigator.clipboard.writeText(`![Commit Cat](${gifUrl})`)
+
+    // 실제 GitHub 데이터를 기반으로 한 URL 생성
+    const gifUrl = `https://gitpaws.vercel.app/api/cat/${githubData.username}`
+    navigator.clipboard.writeText(`![GitPaws Cat](${gifUrl})`)
     setIsGenerating(false)
-    alert("Your adorable cat has been adopted and the markdown code is copied to clipboard! 🐱💕")
+    alert(`Your ${catStages[githubData.catStage].name} has been adopted! 🐱💕\nMarkdown code copied to clipboard!`)
   }
 
   return (
@@ -486,7 +493,7 @@ export default function GifGenerator() {
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
-            🐈 CommitCat 🐈‍⬛
+            🐾 GitPaws 🐾
           </CardTitle>
           <CardDescription className="text-lg">
             Your coding journey visualized through adorable pixel cats!
@@ -506,7 +513,7 @@ export default function GifGenerator() {
                   style={{ imageRendering: "pixelated" }}
                 />
                 <div className="absolute -bottom-2 -right-2 bg-pink-500 text-white text-xs px-2 py-1 rounded animate-pulse">
-                  LIVE
+                  {githubData ? "REAL" : "DEMO"}
                 </div>
               </div>
             </div>
@@ -520,6 +527,11 @@ export default function GifGenerator() {
               {githubData && (
                 <p className="text-sm text-green-600 font-medium">
                   ✨ Real data from @{githubData.username} ({githubData.year})
+                </p>
+              )}
+              {!githubData && (
+                <p className="text-sm text-orange-600 font-medium">
+                  👆 This is a demo! Enter your GitHub username to see your real cat!
                 </p>
               )}
             </div>
@@ -550,20 +562,28 @@ export default function GifGenerator() {
           <div className="text-center mb-6">
             <Button
               onClick={handleGenerateGif}
-              disabled={!username || isGenerating}
+              disabled={!githubData || isGenerating}
               size="lg"
               className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition hover:scale-105"
             >
               {isGenerating ? "Preparing your cat..." : "🐱 Adopt This Cat"}
             </Button>
+            {!githubData && (
+              <p className="text-sm text-gray-500 mt-2">
+                Please fetch your GitHub data first to adopt your real cat! 🐾
+              </p>
+            )}
           </div>
 
           <div className="grid grid-cols-7 gap-2">
             {catStages.map((stage) => (
               <button
                 key={stage.id}
-                onClick={() => setSelectedStage(stage.id)}
-                className={`p-3 rounded-lg border-2 transition-all transform hover:scale-105 ${
+                onClick={() => !githubData && setSelectedStage(stage.id)}
+                disabled={!!githubData}
+                className={`p-3 rounded-lg border-2 transition-all ${
+                  githubData ? "opacity-50 cursor-not-allowed" : "transform hover:scale-105"
+                } ${
                   selectedStage === stage.id
                     ? "border-pink-500 bg-pink-50 shadow-lg"
                     : "border-gray-200 hover:border-gray-300"
@@ -578,6 +598,11 @@ export default function GifGenerator() {
               </button>
             ))}
           </div>
+          {githubData && (
+            <p className="text-center text-sm text-gray-500 mt-2">
+              Cat selection is disabled when using real GitHub data 🐱
+            </p>
+          )}
         </CardContent>
       </Card>
 
@@ -588,7 +613,7 @@ export default function GifGenerator() {
         </CardHeader>
         <CardContent>
           <div className="bg-gray-100 p-4 rounded-lg font-mono text-sm">
-            <code>![My Commit Cat](https://commit-cat.vercel.app/api/cat/your-username)</code>
+            <code>![My GitPaws Cat](https://gitpaws.vercel.app/api/cat/your-username)</code>
           </div>
           <div className="mt-4 space-y-2 text-sm text-gray-600">
             <p>
@@ -596,6 +621,9 @@ export default function GifGenerator() {
             </p>
             <p>• Your cat will automatically grow as you commit more code</p>
             <p>• The more you code, the cuter your cat becomes! 🐱💕</p>
+            <p className="text-orange-600 font-medium">
+              ⚠️ Note: Image generation API is not deployed yet. Coming soon!
+            </p>
           </div>
         </CardContent>
       </Card>
