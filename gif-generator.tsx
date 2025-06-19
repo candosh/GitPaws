@@ -10,70 +10,70 @@ import { Label } from "@/components/ui/label"
 const catStages = [
   {
     id: 0,
-    name: "잠자는 고양이",
-    commits: "0개",
+    name: "Sleepy Cat",
+    commits: "0 commits",
     commitRange: [0, 0],
-    description: "커밋 활동이 없어요",
+    description: "No coding activity yet",
     color: "#A0A0A0",
     animation: "sleeping",
   },
   {
     id: 1,
-    name: "아기 고양이",
-    commits: "1-25개",
+    name: "Baby Kitten",
+    commits: "1-25 commits",
     commitRange: [1, 25],
-    description: "개발을 시작했어요!",
+    description: "Just started coding! 🌱",
     color: "#FFB366",
     animation: "blinking",
   },
   {
     id: 2,
-    name: "호기심 고양이",
-    commits: "26-75개",
+    name: "Curious Kitten",
+    commits: "26-75 commits",
     commitRange: [26, 75],
-    description: "코딩이 재미있어요",
+    description: "Coding is fun! ✨",
     color: "#FF9A56",
     animation: "playing",
   },
   {
     id: 3,
-    name: "활발한 고양이",
-    commits: "76-150개",
+    name: "Active Cat",
+    commits: "76-150 commits",
     commitRange: [76, 150],
-    description: "열심히 개발 중이에요",
+    description: "Coding enthusiast! 🚀",
     color: "#D2691E",
     animation: "bouncing",
   },
   {
     id: 4,
-    name: "성묘",
-    commits: "151-300개",
+    name: "Adult Cat",
+    commits: "151-300 commits",
     commitRange: [151, 300],
-    description: "안정적인 개발자예요",
+    description: "Reliable developer 💪",
     color: "#8B7D6B",
     animation: "sitting",
   },
   {
     id: 5,
-    name: "개발자 고양이",
-    commits: "301-500개",
+    name: "Developer Cat",
+    commits: "301-500 commits",
     commitRange: [301, 500],
-    description: "진짜 개발자가 되었어요",
+    description: "True developer! 👨‍💻",
     color: "#696969",
     animation: "coding",
   },
   {
     id: 6,
-    name: "마스터 고양이",
-    commits: "501개+",
+    name: "Master Cat",
+    commits: "501+ commits",
     commitRange: [501, 999],
-    description: "커밋의 대가입니다!",
+    description: "Commit master! 👑",
     color: "#FFD700",
     animation: "glowing",
   },
 ]
 
-// 커밋 수 시뮬레이션 함수
+// Simulate commit count function
 function getSimulatedCommitCount(stage: number): number {
   const stageData = catStages[stage]
   const [min, max] = stageData.commitRange
@@ -82,7 +82,7 @@ function getSimulatedCommitCount(stage: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-// 픽셀 배열을 그리는 헬퍼 함수
+// Helper function to draw pixel arrays
 function drawPixelArray(
   ctx: CanvasRenderingContext2D,
   pixels: number[][],
@@ -101,33 +101,33 @@ function drawPixelArray(
   }
 }
 
-// 커밋 정보를 귀엽게 표시하는 함수
+// Draw commit info cutely
 function drawCommitInfo(ctx: CanvasRenderingContext2D, stage: number, commitCount: number, frame: number) {
   const catData = catStages[stage]
 
-  // 배경 박스
+  // Background box
   ctx.fillStyle = "rgba(255, 255, 255, 0.9)"
   ctx.fillRect(8, 8, 112, 24)
   ctx.fillStyle = "rgba(0, 0, 0, 0.1)"
   ctx.fillRect(8, 8, 112, 2)
   ctx.fillRect(8, 8, 2, 24)
 
-  // 커밋 아이콘
+  // Commit icon
   ctx.font = "12px monospace"
   ctx.fillStyle = "#4CAF50"
   ctx.fillText("📊", 12, 24)
 
-  // 커밋 수 텍스트
+  // Commit count text
   ctx.font = "10px monospace"
   ctx.fillStyle = "#333333"
   ctx.fillText(`${commitCount} commits`, 28, 20)
 
-  // 단계 표시
+  // Stage display
   ctx.font = "8px monospace"
   ctx.fillStyle = "#666666"
   ctx.fillText(`Lv.${stage}`, 28, 30)
 
-  // 우측 뱃지
+  // Right badge
   ctx.fillStyle = catData.color
   ctx.fillRect(100, 12, 16, 8)
   ctx.fillStyle = "white"
@@ -135,7 +135,7 @@ function drawCommitInfo(ctx: CanvasRenderingContext2D, stage: number, commitCoun
   ctx.fillText(`${stage}`, 104, 18)
 }
 
-// 잠자는 고양이
+// Sleeping cat
 function drawSleepingCat(ctx: CanvasRenderingContext2D, scale: number, frame: number) {
   const pixels = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -165,7 +165,7 @@ function drawSleepingCat(ctx: CanvasRenderingContext2D, scale: number, frame: nu
   }
 }
 
-// 아기 고양이
+// Baby cat
 function drawBabyCat(ctx: CanvasRenderingContext2D, scale: number, frame: number, color: string) {
   const pixels = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -201,7 +201,7 @@ function drawBabyCat(ctx: CanvasRenderingContext2D, scale: number, frame: number
   }
 }
 
-// 호기심 고양이
+// Curious cat
 function drawCuriousCat(ctx: CanvasRenderingContext2D, scale: number, frame: number, color: string) {
   const pixels = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -241,7 +241,7 @@ function drawCuriousCat(ctx: CanvasRenderingContext2D, scale: number, frame: num
   ctx.fillRect(ballX, ballY, scale, scale)
 }
 
-// 활발한 고양이
+// Active cat
 function drawActiveCat(ctx: CanvasRenderingContext2D, scale: number, frame: number, color: string) {
   const pixels = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -272,7 +272,7 @@ function drawActiveCat(ctx: CanvasRenderingContext2D, scale: number, frame: numb
   }
 }
 
-// 성묘
+// Adult cat
 function drawAdultCat(ctx: CanvasRenderingContext2D, scale: number, frame: number, color: string) {
   const pixels = [
     [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
@@ -302,7 +302,7 @@ function drawAdultCat(ctx: CanvasRenderingContext2D, scale: number, frame: numbe
   }
 }
 
-// 개발자 고양이
+// Developer cat
 function drawDeveloperCat(ctx: CanvasRenderingContext2D, scale: number, frame: number, color: string) {
   const pixels = [
     [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
@@ -337,7 +337,7 @@ function drawDeveloperCat(ctx: CanvasRenderingContext2D, scale: number, frame: n
   }
 }
 
-// 마스터 고양이
+// Master cat
 function drawMasterCat(ctx: CanvasRenderingContext2D, scale: number, frame: number) {
   const pixels = [
     [0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0],
@@ -376,7 +376,7 @@ function drawMasterCat(ctx: CanvasRenderingContext2D, scale: number, frame: numb
   })
 }
 
-// 메인 그리기 함수
+// Main drawing function
 function drawPixelCat(ctx: CanvasRenderingContext2D, stage: number, frame = 0, commitCount?: number) {
   const scale = 8
   const catData = catStages[stage]
@@ -413,11 +413,21 @@ function drawPixelCat(ctx: CanvasRenderingContext2D, stage: number, frame = 0, c
   drawCommitInfo(ctx, stage, actualCommits, frame)
 }
 
+interface GitHubData {
+  username: string
+  commitCount: number
+  catStage: number
+  year: number
+}
+
 export default function GifGenerator() {
   const [selectedStage, setSelectedStage] = useState(1)
   const [username, setUsername] = useState("")
   const [isGenerating, setIsGenerating] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [currentFrame, setCurrentFrame] = useState(0)
+  const [githubData, setGithubData] = useState<GitHubData | null>(null)
+  const [error, setError] = useState<string>("")
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -430,28 +440,58 @@ export default function GifGenerator() {
   useEffect(() => {
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext("2d")!
-      drawPixelCat(ctx, selectedStage, currentFrame)
+      const commitCount = githubData?.commitCount
+      drawPixelCat(ctx, selectedStage, currentFrame, commitCount)
     }
-  }, [selectedStage, currentFrame])
+  }, [selectedStage, currentFrame, githubData])
+
+  const fetchGitHubData = async () => {
+    if (!username.trim()) {
+      setError("Please enter a GitHub username")
+      return
+    }
+
+    setIsLoading(true)
+    setError("")
+
+    try {
+      const response = await fetch(`/api/github/${username}`)
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to fetch GitHub data")
+      }
+
+      setGithubData(data)
+      setSelectedStage(data.catStage)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong")
+      setGithubData(null)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleGenerateGif = async () => {
     setIsGenerating(true)
     await new Promise((resolve) => setTimeout(resolve, 2000))
-    const gifUrl = `https://commit-cat.vercel.app/api/gif/${username}?stage=${selectedStage}`
+    const gifUrl = `https://commit-cat.vercel.app/api/cat/${username}?stage=${selectedStage}`
     navigator.clipboard.writeText(`![Commit Cat](${gifUrl})`)
     setIsGenerating(false)
-    alert("고양이가 분양되었고 마크다운 코드가 클립보드에 복사되었습니다! 🐱💕")
+    alert("Your adorable cat has been adopted and the markdown code is copied to clipboard! 🐱💕")
   }
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6 space-y-6">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">🐈GitPaw🐈‍⬛</CardTitle>
-          <CardDescription>
-            Commit 수에 따라 고양이가 달라져요!
+          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+            🐈 CommitCat 🐈‍⬛
+          </CardTitle>
+          <CardDescription className="text-lg">
+            Your coding journey visualized through adorable pixel cats!
             <br />
-            귀여운 고양이 분양해가세요! 🥰
+            <span className="text-pink-500 font-medium">Adopt your purr-fect coding companion! 🥰</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -474,24 +514,37 @@ export default function GifGenerator() {
             <div className="space-y-2">
               <h3 className="text-xl font-semibold">{catStages[selectedStage].name}</h3>
               <Badge variant="secondary" className="text-sm">
-                연간 커밋: {catStages[selectedStage].commits}
+                {githubData ? `${githubData.commitCount} commits this year` : catStages[selectedStage].commits}
               </Badge>
               <p className="text-gray-600">{catStages[selectedStage].description}</p>
+              {githubData && (
+                <p className="text-sm text-green-600 font-medium">
+                  ✨ Real data from @{githubData.username} ({githubData.year})
+                </p>
+              )}
             </div>
           </div>
 
-          <div className="mb-6 max-w-md mx-auto">
-            <Label htmlFor="username" className="text-sm font-medium">
-              GitHub 사용자명
-            </Label>
-            <Input
-              id="username"
-              type="text"
-              placeholder="your-username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1"
-            />
+          <div className="mb-6 max-w-md mx-auto space-y-4">
+            <div>
+              <Label htmlFor="username" className="text-sm font-medium">
+                GitHub Username
+              </Label>
+              <div className="flex gap-2 mt-1">
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="your-username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  onKeyPress={(e) => e.key === "Enter" && fetchGitHubData()}
+                />
+                <Button onClick={fetchGitHubData} disabled={isLoading} variant="outline">
+                  {isLoading ? "Loading..." : "Fetch"}
+                </Button>
+              </div>
+              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+            </div>
           </div>
 
           <div className="text-center mb-6">
@@ -501,7 +554,7 @@ export default function GifGenerator() {
               size="lg"
               className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition hover:scale-105"
             >
-              {isGenerating ? "고양이 준비 중..." : "🐱 고양이 분양하기"}
+              {isGenerating ? "Preparing your cat..." : "🐱 Adopt This Cat"}
             </Button>
           </div>
 
@@ -530,8 +583,8 @@ export default function GifGenerator() {
 
       <Card>
         <CardHeader>
-          <CardTitle>📝 README에 고양이 입양하기</CardTitle>
-          <CardDescription>마크다운 코드를 복사해서 README 파일에 붙여넣으세요</CardDescription>
+          <CardTitle>📝 Add Your Cat to README</CardTitle>
+          <CardDescription>Copy the markdown code and paste it into your README file</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="bg-gray-100 p-4 rounded-lg font-mono text-sm">
@@ -539,10 +592,10 @@ export default function GifGenerator() {
           </div>
           <div className="mt-4 space-y-2 text-sm text-gray-600">
             <p>
-              • <code>your-username</code>을 실제 GitHub 사용자명으로 변경하세요
+              • Replace <code>your-username</code> with your actual GitHub username
             </p>
-            <p>• 고양이는 매일 자동으로 성장합니다</p>
-            <p>• 커밋할수록 더 귀여운 고양이가 됩니다! 🐱💕</p>
+            <p>• Your cat will automatically grow as you commit more code</p>
+            <p>• The more you code, the cuter your cat becomes! 🐱💕</p>
           </div>
         </CardContent>
       </Card>
