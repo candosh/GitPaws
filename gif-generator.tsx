@@ -481,9 +481,9 @@ export default function GifGenerator() {
     setIsGenerating(true)
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    // 실제 GitHub 데이터를 기반으로 한 URL 생성
-    const gifUrl = `https://gitpaws.vercel.app/api/cat/${githubData.username}`
-    navigator.clipboard.writeText(`![GitPaws Cat](${gifUrl})`)
+    // SVG 이미지 URL 생성
+    const imageUrl = `https://gitpaws.vercel.app/api/cat/image/${githubData.username}`
+    navigator.clipboard.writeText(`![GitPaws Cat](${imageUrl})`)
     setIsGenerating(false)
     alert(`Your ${catStages[githubData.catStage].name} has been adopted! 🐱💕\nMarkdown code copied to clipboard!`)
   }
@@ -613,7 +613,7 @@ export default function GifGenerator() {
         </CardHeader>
         <CardContent>
           <div className="bg-gray-100 p-4 rounded-lg font-mono text-sm">
-            <code>![My GitPaws Cat](https://gitpaws.vercel.app/api/cat/your-username)</code>
+            <code>![My GitPaws Cat](https://gitpaws.vercel.app/api/cat/image/your-username)</code>
           </div>
           <div className="mt-4 space-y-2 text-sm text-gray-600">
             <p>
@@ -621,9 +621,7 @@ export default function GifGenerator() {
             </p>
             <p>• Your cat will automatically grow as you commit more code</p>
             <p>• The more you code, the cuter your cat becomes! 🐱💕</p>
-            <p className="text-orange-600 font-medium">
-              ⚠️ Note: Image generation API is not deployed yet. Coming soon!
-            </p>
+            <p className="text-green-600 font-medium">✅ SVG images work perfectly in README files!</p>
           </div>
         </CardContent>
       </Card>
