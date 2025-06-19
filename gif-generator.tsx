@@ -1,11 +1,6 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
 const catStages = [
   {
@@ -489,142 +484,144 @@ export default function GifGenerator() {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 space-y-6">
-      <Card>
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             🐾 GitPaws 🐾
-          </CardTitle>
-          <CardDescription className="text-lg">
-            Your coding journey visualized through adorable pixel cats!
-            <br />
-            <span className="text-pink-500 font-medium">Adopt your purr-fect coding companion! 🥰</span>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center mb-8">
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-8 mb-4 flex items-center justify-center relative">
-              <div className="relative">
-                <canvas
-                  ref={canvasRef}
-                  width={128}
-                  height={128}
-                  className="pixel-art border-2 border-gray-300 rounded shadow-lg"
-                  style={{ imageRendering: "pixelated" }}
-                />
-                <div className="absolute -bottom-2 -right-2 bg-pink-500 text-white text-xs px-2 py-1 rounded animate-pulse">
-                  {githubData ? "REAL" : "DEMO"}
-                </div>
-              </div>
+          </h1>
+          <p className="text-lg text-gray-600 mb-6">Your coding journey visualized through adorable pixel cats!</p>
+
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div className="flex items-center justify-center mb-4">
+              <canvas
+                ref={canvasRef}
+                width={128}
+                height={128}
+                className="pixel-art border-2 border-gray-200 rounded-lg"
+              />
             </div>
 
-            <div className="space-y-2">
-              <h3 className="text-xl font-semibold">{catStages[selectedStage].name}</h3>
-              <Badge variant="secondary" className="text-sm">
+            <div className="text-center space-y-2">
+              <div className="flex items-center justify-center gap-2">
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm font-medium">
+                  {githubData ? "REAL" : "DEMO"}
+                </span>
+                <h3 className="text-xl font-bold">{catStages[selectedStage].name}</h3>
+              </div>
+              <p className="text-gray-600">
                 {githubData ? `${githubData.commitCount} commits this year` : catStages[selectedStage].commits}
-              </Badge>
-              <p className="text-gray-600">{catStages[selectedStage].description}</p>
+              </p>
+              <p className="text-sm text-gray-500">{catStages[selectedStage].description}</p>
               {githubData && (
-                <p className="text-sm text-green-600 font-medium">
+                <p className="text-xs text-green-600 font-medium">
                   ✨ Real data from @{githubData.username} ({githubData.year})
                 </p>
               )}
-              {!githubData && (
-                <p className="text-sm text-orange-600 font-medium">
-                  👆 This is a demo! Enter your GitHub username to see your real cat!
-                </p>
-              )}
             </div>
-          </div>
 
-          <div className="mb-6 max-w-md mx-auto space-y-4">
-            <div>
-              <Label htmlFor="username" className="text-sm font-medium">
-                GitHub Username
-              </Label>
-              <div className="flex gap-2 mt-1">
-                <Input
-                  id="username"
+            {!githubData && (
+              <div className="mt-6 flex gap-2">
+                <input
                   type="text"
                   placeholder="your-username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && fetchGitHubData()}
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
-                <Button onClick={fetchGitHubData} disabled={isLoading} variant="outline">
+                <button
+                  onClick={fetchGitHubData}
+                  disabled={isLoading}
+                  className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:opacity-50"
+                >
                   {isLoading ? "Loading..." : "Fetch"}
-                </Button>
+                </button>
               </div>
-              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-            </div>
-          </div>
+            )}
 
-          <div className="text-center mb-6">
-            <Button
+            {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
+
+            <button
               onClick={handleGenerateGif}
-              disabled={!githubData || isGenerating}
-              size="lg"
-              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition hover:scale-105"
+              disabled={isGenerating}
+              className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg font-medium hover:from-pink-600 hover:to-purple-700 disabled:opacity-50 transition-all"
             >
               {isGenerating ? "Preparing your cat..." : "🐱 Adopt This Cat"}
-            </Button>
+            </button>
+
             {!githubData && (
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="mt-2 text-xs text-gray-500 text-center">
                 Please fetch your GitHub data first to adopt your real cat! 🐾
               </p>
             )}
           </div>
 
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-2 mb-6">
             {catStages.map((stage) => (
               <button
                 key={stage.id}
                 onClick={() => !githubData && setSelectedStage(stage.id)}
-                disabled={!!githubData}
-                className={`p-3 rounded-lg border-2 transition-all ${
-                  githubData ? "opacity-50 cursor-not-allowed" : "transform hover:scale-105"
-                } ${
+                disabled={githubData}
+                className={`p-2 rounded-lg border-2 transition-all ${
                   selectedStage === stage.id
-                    ? "border-pink-500 bg-pink-50 shadow-lg"
+                    ? "border-purple-500 bg-purple-50"
                     : "border-gray-200 hover:border-gray-300"
-                }`}
+                } ${githubData ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
               >
-                <div
-                  className="w-8 h-8 mx-auto mb-2 rounded border shadow-sm"
-                  style={{ backgroundColor: stage.color }}
-                ></div>
-                <div className="text-xs font-medium">{stage.name}</div>
-                <div className="text-xs text-gray-500">{stage.commits}</div>
+                <div className="text-center">
+                  <div className="text-xs font-medium">{stage.name}</div>
+                  <div className="text-xs text-gray-500">{stage.commits}</div>
+                </div>
               </button>
             ))}
           </div>
           {githubData && (
-            <p className="text-center text-sm text-gray-500 mt-2">
+            <p className="text-sm text-gray-500 text-center mb-6">
               Cat selection is disabled when using real GitHub data 🐱
             </p>
           )}
-        </CardContent>
-      </Card>
+        </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>📝 Add Your Cat to README</CardTitle>
-          <CardDescription>Copy the markdown code and paste it into your README file</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="bg-gray-100 p-4 rounded-lg font-mono text-sm">
-            <code>![My GitPaws Cat](https://gitpaws.vercel.app/api/cat/image/your-username)</code>
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-2xl font-bold mb-2 text-center">📝 Add Your Cat to README</h2>
+          <p className="text-gray-600 text-center mb-4">Copy the markdown code and paste it into your README file</p>
+          <div className="bg-gray-100 p-4 rounded-lg font-mono text-sm mb-4">
+            <code>![GitPaws Cat](https://gitpaws.vercel.app/api/cat/image/your-username)</code>
           </div>
-          <div className="mt-4 space-y-2 text-sm text-gray-600">
+          <div className="space-y-2 text-sm text-gray-600">
             <p>
               • Replace <code>your-username</code> with your actual GitHub username
             </p>
             <p>• Your cat will automatically grow as you commit more code</p>
             <p>• The more you code, the cuter your cat becomes! 🐱💕</p>
-            
           </div>
-        </CardContent>
-      </Card>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+          <div className="mb-4">
+            <p className="text-lg font-medium text-gray-800 mb-2">
+              Made with 💜 by{" "}
+              <a
+                href="https://github.com/candosh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-purple-600 hover:text-purple-800 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                candosh
+              </a>
+            </p>
+            <p className="text-gray-600">Transform your GitHub commits into adorable pixel cats! 🐱✨</p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
