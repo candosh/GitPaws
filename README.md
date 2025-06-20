@@ -11,6 +11,9 @@ The more you code, the cuter your cat becomes.
 **[https://gitpaws.vercel.app](https://gitpaws.vercel.app)**
 
 ## Usage
-Enter your GitHub ID, click fetch and then adopt, and a link will be copied that you can paste directly into ReadMe.
+Enter your GitHub ID, click fetch and then adopt, and a link will be copied that you can paste directly into ReadMe 💕
 
 Replace `your-username` with your GitHub username and watch your cat grow! 🌱➡️🐱
+
+# Notification
+I carried out this project to experiment with AI vibe coding. It took about an hour to create the service.🫢😎
