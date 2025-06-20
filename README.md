@@ -15,6 +15,6 @@ Enter your GitHub ID, click fetch and then adopt, and a link will be copied that
 
 Replace `your-username` with your GitHub username and watch your cat grow! 🌱➡️🐱
 
-# Notification
+## Notification
 - I carried out this project to experiment with AI vibe coding. It took about an hour to create the service.🫢😎
 - Only commits made to public repositories are counted. 📂
